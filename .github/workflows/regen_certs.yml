@@ -2,8 +2,8 @@ name: certificates
 on:
   # Our certificates are good for ~1 year, but we regenerate them every
   # month to be sure. Also support manually triggering the workflow.
-  schedule:
-    - cron: 0 0 12 * *
+  # schedule:
+    # - cron: 0 0 12 * *
   workflow_dispatch:
 jobs:
   update:

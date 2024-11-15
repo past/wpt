@@ -1,8 +1,8 @@
 name: interfaces
 on:
   # Trigger at every UTC noon, or manually.
-  schedule:
-    - cron: 0 12 * * *
+  # schedule:
+  #   - cron: 0 12 * * *
   workflow_dispatch:
 jobs:
   update:
