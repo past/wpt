@@ -1,11 +1,12 @@
 name: manifest
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    paths:
-      - 'tools/**'
+  workflow_dispatch:
+    # push:
+  #   branches:
+  #     - master
+  # pull_request:
+  #   paths:
+  #     - 'tools/**'
 jobs:
   build-and-tag:
     runs-on: ubuntu-20.04
