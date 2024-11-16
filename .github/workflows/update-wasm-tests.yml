@@ -1,0 +1,36 @@
+name: Update WASM tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-wpt:
+    runs-on: ubuntu-24.10
+    steps:
+      - name: Checkout WPT repo
+        uses: actions/checkout@v4
+        with:
+          path: main
+      - name: Checkout WASM repo
+        uses: actions/checkout@v4
+        with:
+          repository: WebAssembly/spec
+          path: wasm-spec
+      - name: Setup OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 4.14.x
+      - name: Setup OCaml tools
+        run: opam install --yes ocamlfind.1.9.5 js_of_ocaml.4.0.0 js_of_ocaml-ppx.4.0.0
+      - name: Build interpreter
+        run: cd wasm-spec/interpreter && opam exec make
+      - name: Convert WAST tests to WPT
+        run: wasm-spec/test/build.py --dont-recompile --html wasm-spec/out/
+      - name: Copy WASM tests to WPT
+        run: cp -r wasm-spec/out/ main/wasm/core/
+      - name: Generate PR
+        run: |
+          cd main
+          git co -b wasm-update
+          git ci -am "Update WASM tests"
+          git push
