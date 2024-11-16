@@ -1,6 +1,9 @@
 name: Update WASM tests
 
 on:
+  # Trigger at every Sunday UTC noon, or manually.
+  schedule:
+    - cron: 0 12 * * 0
   workflow_dispatch:
 
 jobs:
@@ -31,13 +34,13 @@ jobs:
       - name: Create PR
         run: |
           cd main
-          git config user.name $GIT_AUTHOR_NAME
-          git config user.email $GIT_AUTHOR_EMAIL
+          git config user.name "$GIT_AUTHOR_NAME"
+          git config user.email "$GIT_AUTHOR_EMAIL"
           git checkout -b $BRANCH_NAME
           git add wasm/core/
-          git commit -m $COMMIT_TITLE
-          git push --set-upstream origin $BRANCH_NAME
-          gh pr create --title $COMMIT_TITLE --body $PR_BODY --reviewer past
+          git commit -m "$COMMIT_TITLE"
+          git push --set-upstream origin "$BRANCH_NAME"
+          gh pr create --title "$COMMIT_TITLE" --body "$PR_BODY" --reviewer past
         env:
           GIT_AUTHOR_NAME: "Panagiotis Astithas"
           GIT_AUTHOR_EMAIL: "pastith@gmail.com"
