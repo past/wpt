@@ -32,6 +32,7 @@ jobs:
       - name: Copy WASM tests to WPT
         run: rm -rf main/wasm/core && cp -r wasm-spec/out/ main/wasm/core/
       - name: Commit changes
+        continue-on-error: true
         run: |
           cd main
           export BRANCH_NAME="$BRANCH_PREAMBLE-$(date +'%Y%m%d%H%M%S')"
