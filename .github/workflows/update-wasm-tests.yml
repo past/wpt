@@ -36,10 +36,10 @@ jobs:
           cd main
           git config user.name "$GIT_AUTHOR_NAME"
           git config user.email "$GIT_AUTHOR_EMAIL"
-          git checkout -b $BRANCH_NAME-$(date +'%Y%m%d')
+          git checkout -b $BRANCH_NAME-$(date +'%Y%m%d%H%M%S')
           git add wasm/core/
           git commit -m "$COMMIT_TITLE"
-          git push --set-upstream origin $BRANCH_NAME-$(date +'%Y%m%d')
+          git push --set-upstream origin $BRANCH_NAME-$(date +'%Y%m%d%H%M%S')
           gh pr create --title "$COMMIT_TITLE" --body "$PR_BODY" --reviewer past
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
