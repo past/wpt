@@ -39,7 +39,7 @@ jobs:
           git checkout -b $BRANCH_NAME-$(date +'%Y%m%d%H%M%S')
           git add wasm/core/
           git commit -m "$COMMIT_TITLE"
-          git push --set-upstream origin $BRANCH_NAME-$(date +'%Y%m%d%H%M%S')
+          git push --set-upstream origin "$BRANCH_NAME-$(date +'%Y%m%d%H%M%S')"
           gh pr create --title "$COMMIT_TITLE" --body "$PR_BODY" --reviewer past
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
