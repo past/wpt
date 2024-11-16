@@ -39,7 +39,7 @@ jobs:
           git config user.email "$GIT_AUTHOR_EMAIL"
           git checkout -b $BRANCH_NAME
           git add wasm/core/
-          git commit -m "$COMMIT_TITLE"
+          git commit -m "$COMMIT_TITLE" --allow-empty
           git push --set-upstream origin $BRANCH_NAME
           gh pr create --title "$COMMIT_TITLE" --body "$PR_BODY" --reviewer past
         env:
