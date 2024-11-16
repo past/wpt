@@ -32,6 +32,7 @@ jobs:
       - name: Copy WASM tests to WPT
         run: rm -rf main/wasm/core && cp -r wasm-spec/out/ main/wasm/core/
       - name: Commit changes
+        id: commit
         continue-on-error: true
         run: |
           cd main
@@ -48,7 +49,8 @@ jobs:
           BRANCH_PREAMBLE: "wasm-update"
           COMMIT_TITLE: "Update WASM tests"
       - name: Create PR
-        if: ${{ success() }}
+        # Check outcome for success as continue-on-error will mask failure
+        if: ${{ steps.commit.outcome == 'success' }}
         run: |
           git push --set-upstream origin $BRANCH_NAME
           gh pr create --title "$COMMIT_TITLE" --body "$PR_BODY" --reviewer past
