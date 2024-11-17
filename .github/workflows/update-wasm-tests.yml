@@ -17,7 +17,7 @@ jobs:
       - name: Checkout WASM repo
         uses: actions/checkout@v4
         with:
-          repository: WebAssembly/spec
+          repository: past/wasm-spec
           path: wasm-spec
       - name: Setup OCaml
         uses: ocaml/setup-ocaml@v3
