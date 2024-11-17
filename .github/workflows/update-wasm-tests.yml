@@ -52,7 +52,8 @@ jobs:
         # Check outcome for success as continue-on-error will mask failure.
         if: ${{ steps.commit.outcome == 'success' }}
         run: |
-          git push --set-upstream origin "$BRANCH_NAME"
+          cd main
+          git push --set-upstream origin $BRANCH_NAME
           gh pr create --title "$COMMIT_TITLE" --body "$PR_BODY" --reviewer past
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
