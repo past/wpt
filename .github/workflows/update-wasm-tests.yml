@@ -2,8 +2,8 @@ name: Update WASM tests
 
 on:
   # Trigger at every Sunday UTC noon, or manually.
-  schedule:
-    - cron: 0 12 * * 0
+#  schedule:
+#    - cron: 0 12 * * 0
   workflow_dispatch:
 
 jobs:
