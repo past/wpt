@@ -34,7 +34,6 @@ jobs:
         run: |
           rm -rf main/wasm/core
           cp -r wasm-spec/out/ main/wasm/core/
-          find main/wasm/core/ -type f -name '*.html' -exec sed -i 's/\.\/js\/harness\/testharness/\/resources\/testharness/' {} \;
       - name: Commit changes
         id: commit
         continue-on-error: true
